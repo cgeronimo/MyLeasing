@@ -34,7 +34,7 @@ namespace MyLeasing.Web.Controllers
             }
 
             var owner = await _context.Owners
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (owner == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace MyLeasing.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Document,FirstName,LastName,FixedPhone,CellPhone,Address")] Owner owner)
+        public async Task<IActionResult> Create([Bind("id")] Owner owner)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace MyLeasing.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Document,FirstName,LastName,FixedPhone,CellPhone,Address")] Owner owner)
+        public async Task<IActionResult> Edit(int id, [Bind("id")] Owner owner)
         {
-            if (id != owner.Id)
+            if (id != owner.id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace MyLeasing.Web.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OwnerExists(owner.Id))
+                    if (!OwnerExists(owner.id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace MyLeasing.Web.Controllers
             }
 
             var owner = await _context.Owners
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (owner == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace MyLeasing.Web.Controllers
 
         private bool OwnerExists(int id)
         {
-            return _context.Owners.Any(e => e.Id == id);
+            return _context.Owners.Any(e => e.id == id);
         }
     }
 }
